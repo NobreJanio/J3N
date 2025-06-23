@@ -2,15 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { UserModel } from '../models/User';
 
-export interface AuthRequest extends Request {
-  user?: {
-    id: number;
-    email: string;
-    name: string;
-  };
-}
-
-export const authenticateToken = async (req: AuthRequest, res: Response, next: NextFunction): Promise<void> => {
+export const authenticateToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
@@ -48,7 +40,10 @@ export const authenticateToken = async (req: AuthRequest, res: Response, next: N
     req.user = {
       id: user.id,
       email: user.email,
-      name: user.name
+      name: user.name,
+      role: 'user', // Valor padrão
+      created_at: user.created_at,
+      updated_at: user.updated_at
     };
 
     next();
@@ -80,4 +75,4 @@ export const generateToken = (userId: number): string => {
     jwtSecret,
     { expiresIn: '7d' }
   );
-}; 
+};

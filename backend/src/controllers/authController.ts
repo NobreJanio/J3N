@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UserModel, LoginData } from '../models/User';
-import { generateToken, AuthRequest } from '../middleware/auth';
+import { generateToken } from '../middleware/auth';
 import bcrypt from 'bcrypt';
 
 export const authController = {
@@ -65,7 +65,7 @@ export const authController = {
   },
 
   // Verificar se o token é válido
-  async verifyToken(req: AuthRequest, res: Response): Promise<void> {
+  async verifyToken(req: Request, res: Response): Promise<void> {
     try {
       // Se chegou até aqui, o token é válido (middleware já validou)
       res.json({
@@ -103,7 +103,7 @@ export const authController = {
   },
 
   // Obter dados do usuário atual
-  async getCurrentUser(req: AuthRequest, res: Response): Promise<void> {
+  async getCurrentUser(req: Request, res: Response): Promise<void> {
     try {
       if (!req.user) {
         res.status(401).json({
@@ -145,7 +145,7 @@ export const authController = {
   },
 
   // Alterar senha do usuário
-  async changePassword(req: AuthRequest, res: Response): Promise<void> {
+  async changePassword(req: Request, res: Response): Promise<void> {
     try {
       if (!req.user) {
         res.status(401).json({
@@ -212,4 +212,4 @@ export const authController = {
       });
     }
   }
-}; 
+};

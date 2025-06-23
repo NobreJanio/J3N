@@ -1,16 +1,11 @@
 import { Request, Response } from 'express';
 import { WorkflowModel, CreateWorkflowData, UpdateWorkflowData } from '../models/Workflow';
 
-interface AuthenticatedRequest extends Request {
-  user?: {
-    id: number;
-    email: string;
-  };
-}
+
 
 export class WorkflowController {
   // Listar todos os workflows do usuário
-  static async getWorkflows(req: AuthenticatedRequest, res: Response) {
+  static async getWorkflows(req: Request, res: Response) {
     try {
       const userId = req.user?.id;
       if (!userId) {
@@ -26,7 +21,7 @@ export class WorkflowController {
   }
 
   // Buscar workflow específico
-  static async getWorkflow(req: AuthenticatedRequest, res: Response) {
+  static async getWorkflow(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const userId = req.user?.id;
@@ -54,7 +49,7 @@ export class WorkflowController {
   }
 
   // Criar novo workflow
-  static async createWorkflow(req: AuthenticatedRequest, res: Response) {
+  static async createWorkflow(req: Request, res: Response) {
     try {
       const userId = req.user?.id;
       if (!userId) {
@@ -84,7 +79,7 @@ export class WorkflowController {
   }
 
   // Atualizar workflow
-  static async updateWorkflow(req: AuthenticatedRequest, res: Response) {
+  static async updateWorkflow(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const userId = req.user?.id;
@@ -125,7 +120,7 @@ export class WorkflowController {
   }
 
   // Deletar workflow
-  static async deleteWorkflow(req: AuthenticatedRequest, res: Response) {
+  static async deleteWorkflow(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const userId = req.user?.id;
@@ -158,7 +153,7 @@ export class WorkflowController {
   }
 
   // Alternar status ativo/inativo
-  static async toggleWorkflowActive(req: AuthenticatedRequest, res: Response) {
+  static async toggleWorkflowActive(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const userId = req.user?.id;
@@ -191,7 +186,7 @@ export class WorkflowController {
   }
 
   // Duplicar workflow
-  static async duplicateWorkflow(req: AuthenticatedRequest, res: Response) {
+  static async duplicateWorkflow(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const { name } = req.body;
@@ -227,4 +222,4 @@ export class WorkflowController {
       return res.status(500).json({ error: 'Erro interno do servidor' });
     }
   }
-} 
+}

@@ -11,6 +11,11 @@ import nodeRoutes from './routes/nodeRoutes';
 import credentialRoutes from './routes/credentialRoutes';
 import executionRoutes from './routes/executionRoutes';
 import userRoutes from './routes/userRoutes';
+import analyticsRoutes from './routes/analytics';
+import schedulingRoutes from './routes/scheduling';
+import webhooksRoutes from './routes/webhooks';
+import templatesRoutes from './routes/templates';
+import versioningRoutes from './routes/versioning';
 import { authenticateToken } from './middleware/auth';
 import { UserModel } from './models/User';
 import pool from './config/database';
@@ -66,6 +71,11 @@ app.use('/api/nodes', nodeRoutes);
 app.use('/api/credentials', credentialRoutes);
 app.use('/api/executions', executionRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/scheduling', schedulingRoutes);
+app.use('/api/webhooks', webhooksRoutes);
+app.use('/api/templates', templatesRoutes);
+app.use('/api/versioning', versioningRoutes);
 
 // Middleware de tratamento de erros
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -128,4 +138,4 @@ async function startServer() {
   }
 }
 
-startServer(); 
+startServer();

@@ -4,12 +4,7 @@ import { ExecutionModel } from '../models/Execution';
 import { WorkflowExecute, IWorkflow, IWorkflowNode, IWorkflowConnections } from '../core/WorkflowExecute';
 import { v4 as uuidv4 } from 'uuid';
 
-interface AuthenticatedRequest extends Request {
-  user?: {
-    id: number;
-    email: string;
-  };
-}
+
 
 /**
  * Converte workflow do formato do frontend para o formato do backend
@@ -80,7 +75,7 @@ export const executionController = {
   /**
    * Executa um workflow manualmente
    */
-  async executeWorkflow(req: AuthenticatedRequest, res: Response) {
+  async executeWorkflow(req: Request, res: Response) {
     try {
       const { workflowId } = req.params;
       const { inputData } = req.body;
@@ -157,7 +152,7 @@ export const executionController = {
   /**
    * Lista execuções de um workflow
    */
-  async getWorkflowExecutions(req: AuthenticatedRequest, res: Response) {
+  async getWorkflowExecutions(req: Request, res: Response) {
     try {
       const { workflowId } = req.params;
       const { limit = 50 } = req.query;
@@ -268,7 +263,7 @@ export const executionController = {
   /**
    * Obtém detalhes de uma execução específica
    */
-  async getExecution(req: AuthenticatedRequest, res: Response) {
+  async getExecution(req: Request, res: Response) {
     try {
       const { executionId } = req.params;
       const userId = req.user!.id;
@@ -309,7 +304,7 @@ export const executionController = {
   /**
    * Para uma execução em andamento
    */
-  async stopExecution(req: AuthenticatedRequest, res: Response) {
+  async stopExecution(req: Request, res: Response) {
     try {
       const { executionId } = req.params;
       const userId = req.user!.id;
@@ -360,7 +355,7 @@ export const executionController = {
   /**
    * Obtém estatísticas de execução
    */
-  async getExecutionStats(req: AuthenticatedRequest, res: Response) {
+  async getExecutionStats(req: Request, res: Response) {
     try {
       const { workflowId } = req.query;
       const userId = req.user!.id;
@@ -401,7 +396,7 @@ export const executionController = {
   /**
    * Lista execuções em andamento
    */
-  async getRunningExecutions(req: AuthenticatedRequest, res: Response) {
+  async getRunningExecutions(req: Request, res: Response) {
     try {
       const executions = await ExecutionModel.getRunningExecutions();
 
@@ -422,7 +417,7 @@ export const executionController = {
   /**
    * Exclui uma execução
    */
-  async deleteExecution(req: AuthenticatedRequest, res: Response) {
+  async deleteExecution(req: Request, res: Response) {
     try {
       const { executionId } = req.params;
       const userId = req.user!.id;
@@ -486,4 +481,4 @@ export const executionController = {
       });
     }
   }
-}; 
+};

@@ -1,12 +1,7 @@
 import { Request, Response } from 'express';
 import { NodeService } from '../services/NodeService';
 
-interface AuthenticatedRequest extends Request {
-  user?: {
-    id: number;
-    email: string;
-  };
-}
+
 
 interface NodeExecutionRequest {
   nodeType: string;
@@ -18,7 +13,7 @@ export class NodeController {
   /**
    * Executa um node individual
    */
-  static async executeNode(req: AuthenticatedRequest, res: Response): Promise<void> {
+  static async executeNode(req: Request, res: Response): Promise<void> {
     try {
       const { nodeType, parameters, inputData = [] } = req.body as NodeExecutionRequest;
       
@@ -55,7 +50,7 @@ export class NodeController {
   /**
    * Lista todos os tipos de nodes disponíveis
    */
-  static async getAvailableNodes(req: AuthenticatedRequest, res: Response) {
+  static async getAvailableNodes(req: Request, res: Response) {
     try {
       // Obter nodes disponíveis do NodeService
       const nodeTypes = NodeService.getAvailableNodeTypes();
@@ -86,7 +81,7 @@ export class NodeController {
   /**
    * Obtém a definição de um node específico
    */
-  static async getNodeDefinition(req: AuthenticatedRequest, res: Response): Promise<void> {
+  static async getNodeDefinition(req: Request, res: Response): Promise<void> {
     try {
       const { nodeType } = req.params;
       

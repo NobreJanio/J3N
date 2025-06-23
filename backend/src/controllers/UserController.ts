@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { UserService } from '../services/UserService';
-import { AuthRequest } from '../middleware/auth';
+
 
 export class UserController {
   private userService: UserService;
@@ -87,7 +87,7 @@ export class UserController {
     }
   };
 
-  deleteUser = async (req: AuthRequest, res: Response): Promise<void> => {
+  deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
       const userId = parseInt(id);
@@ -111,4 +111,4 @@ export class UserController {
       res.status(500).json({ message: 'Erro interno do servidor' });
     }
   };
-} 
+}
