@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ReactFlow customizations */
+.react-flow__handle {
+  width: 12px !important;
+  height: 12px !important;
+  background: #6b7280 !important;
+  border: 2px solid white !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.react-flow__handle:hover {
+  background: #374151 !important;
+  transform: scale(1.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Node selection styles - traçado cinza/branco com baixa opacidade */
+.react-flow__node.selected {
+  outline: none !important;
+}
+
+.react-flow__node.selected > div {
+  box-shadow: 0 0 0 1px rgba(107, 114, 128, 0.3) !important;
+}
+
+/* Dark mode selection */
+.dark .react-flow__node.selected > div {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) !important;
+}
+
+.react-flow__node:focus,
+.react-flow__node:focus-visible {
+  outline: none !important;
+}
+
+.react-flow__node {
+  cursor: pointer;
+}
+
+/* ReactFlow Controls - Tema claro/escuro */
+.react-flow__controls {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark .react-flow__controls {
+  background: #374151 !important;
+  border: 1px solid #4b5563 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border: none !important;
+  color: #6b7280 !important;
+  transition: all 0.2s ease !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #f3f4f6 !important;
+  color: #374151 !important;
+}
+
+.dark .react-flow__controls-button {
+  color: #d1d5db !important;
+}
+
+.dark .react-flow__controls-button:hover {
+  background: #4b5563 !important;
+  color: #f9fafb !important;
+}
+
+.react-flow__controls-button svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+
+/* Container do botão Test Flow para alinhamento */
+.react-flow__controls > div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  height: 32px !important;
+}
+
+/* Botão Test Flow customizado nos controles */
+.react-flow__controls .test-flow-button {
+  background: #16a34a !important;
+  color: white !important;
+  border-radius: 16px !important;
+  padding: 8px 16px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  min-width: 100px !important;
+  height: 32px !important;
+  margin: 0 !important;
+}
+
+.react-flow__controls .test-flow-button:hover:not(:disabled) {
+  background: #15803d !important;
+  transform: scale(1.05) !important;
+}
+
+.react-flow__controls .test-flow-button:active:not(:disabled) {
+  transform: scale(0.95) !important;
+}
+
+.react-flow__controls .test-flow-button:disabled {
+  background: #9ca3af !important;
+  cursor: not-allowed !important;
+}
+
+/* Animações para modais */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-slide-in-top {
+  animation: slide-in-top 0.3s ease-out;
+}
+
+/* Estilos para drag and drop */
+.drag-drop-field {
+  position: relative;
+}
+
+.drag-drop-field::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed transparent;
+  border-radius: 4px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.drag-drop-field:hover::after {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.drag-drop-field.drag-over {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.drag-drop-field.drag-over::after {
+  border-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Estilo para item sendo arrastado do schema */
+.schema-item-dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.2s ease;
+}
+
+/* Preview do drag */
+.drag-preview {
+  background: #3b82f6;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* Ocultar atribuição do React Flow */
+.react-flow__attribution {
+  display: none !important;
+}
+
+.react-flow__panel.react-flow__attribution {
+  display: none !important;
+}
